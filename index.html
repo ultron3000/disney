@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Animation Movie Collection</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Background setup */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Walt_Disney_Pictures_2011_logo_%28colored%29.svg/1200px-Walt_Disney_Pictures_2011_logo_%28colored%29.svg.png') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+    }
+
+    /* Dark overlay for better text visibility */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 50px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      font-family: 'Helvetica', sans-serif;
+      font-weight: bold;
+      color: #ffcc00; /* Gold color for Disney theme */
+    }
+
+    .movie-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .movie-card {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffcc00;
+      border-radius: 12px;
+      padding: 20px;
+      width: 200px;
+      transition: all 0.3s ease;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+
+    .movie-card a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .movie-card a:hover {
+      color: #ffcc00;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #c00;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+
+    .back-button:hover {
+      background-color: #900;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .movie-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .movie-card {
+        width: 80%;
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .movie-card {
+        width: 90%;
+        font-size: 1rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <h1>Disney Animation Movie Collection</h1>
+
+  <div class="movie-container">
+    <div class="movie-card"><a href="wreckitralph.html">Wreck-It Ralph (2012)</a></div>
+    <div class="movie-card"><a href="ralphbreakstheinternet.html">Ralph Breaks the Internet (2018)</a></div>
+    <div class="movie-card"><a href="strangeworld.html">Strange World (2022)</a></div>
+    <div class="movie-card"><a href="bighero6.html">Big Hero 6 (2014)</a></div>
+    <div class="movie-card"><a href="zootopia.html">Zootopia (2016)</a></div>
+    <div class="movie-card"><a href="moana.html">Moana (2016)</a></div>
+    <div class="movie-card"><a href="moana2.html">Moana 2 (2024)</a></div>
+    <div class="movie-card"><a href="encanto.html">Encanto (2021)</a></div>
+    <div class="movie-card"><a href="rayaandthelastdragon.html">Raya and the Last Dragon (2021)</a></div>
+    <div class="movie-card"><a href="usagain.html">Us Again (2021)</a></div>
+    <div class="movie-card"><a href="therescuersdownunder.html">The Rescuers Down Under (1990)</a></div>
+    <div class="movie-card"><a href="planes.html">Planes (2013)</a></div>
+    <div class="movie-card"><a href="wish.html">Wish (2023)</a></div>
+    <div class="movie-card"><a href="frozen.html">Frozen (2013)</a></div>
+    <div class="movie-card"><a href="frozen2.html">Frozen II (2019)</a></div>
+    <div class="movie-card"><a href="frozenfever.html">Frozen Fever (2015)</a></div>
+    <div class="movie-card"><a href="arendellecastleyulelog.html">Arendelle Castle Yule Log: Cut Paper Edition (2020)</a></div>
+    <div class="movie-card"><a href="onceuponasnowman.html">Once Upon a Snowman (2020)</a></div>
+    <div class="movie-card"><a href="mythafrozentale.html">Myth: A Frozen Tale (2020)</a></div>
+    <div class="movie-card"><a href="beautyandthebeast.html">Beauty and the Beast (1991)</a></div>
+    <div class="movie-card"><a href="lionking.html">The Lion King (1994)</a></div>
+    <div class="movie-card"><a href="mufasalionking.html">Mufasa: The Lion King (2023)</a></div>
+    <div class="movie-card"><a href="paperman.html">Paperman (2012)</a></div>
+    <div class="movie-card"><a href="getahorse.html">Get a Horse! (2013)</a></div>
+    <div class="movie-card"><a href="feast.html">Feast (2014)</a></div>
+    <div class="movie-card"><a href="pocahontas.html">Pocahontas (1995)</a></div>
+    <div class="movie-card"><a href="farfromthetree.html">Far From the Tree (2021)</a></div>
+    <div class="movie-card"><a href="innerworkings.html">Inner Workings (2016)</a></div>
+    <div class="movie-card"><a href="hercules.html">Hercules (1997)</a></div>
+    <div class="movie-card"><a href="bolt.html">Bolt (2008)</a></div>
+    <div class="movie-card"><a href="superrhino.html">Super Rhino (2009)</a></div>
+    <div class="movie-card"><a href="mulan.html">Mulan (1998)</a></div>
+    <div class="movie-card"><a href="tarzan.html">Tarzan (1999)</a></div>
+    <div class="movie-card"><a href="thelittlemermaidii.html">The Little Mermaid II: Return to the Sea (2000)</a></div>
+    <div class="movie-card"><a href="dinosaur.html">Dinosaur (2000)</a></div>
+    <div class="movie-card"><a href="emperorsnewgroove.html">The Emperor's New Groove (2000)</a></div>
+    <div class="movie-card"><a href="atlantis.html">Atlantis: The Lost Empire (2001)</a></div>
+    <div class="movie-card"><a href="liloandstitch.html">Lilo & Stitch (2002)</a></div>
+    <div class="movie-card"><a href="treasureplanet.html">Treasure Planet (2002)</a></div>
+    <div class="movie-card"><a href="destino.html">Destino (2003)</a></div>
+    <div class="movie-card"><a href="brotherbear.html">Brother Bear (2003)</a></div>
+    <div class="movie-card"><a href="chickenlittle.html">Chicken Little (2005)</a></div>
+    <div class="movie-card"><a href="meettherobinsons.html">Meet the Robinsons (2007)</a></div>
+    <div class="movie-card"><a href="princessandthefrog.html">The Princess and the Frog (2009)</a></div>
+    <div class="movie-card"><a href="ticktocktale.html">Tick Tock Tale (2010)</a></div>
+    <div class="movie-card"><a href="winniethepooh.html">Winnie the Pooh (2011)</a></div>
+    <div class="movie-card"><a href="prepandlanding.html">Prep & Landing: Naughty vs. Nice (2011)</a></div>
+    <div class="movie-card"><a href="tangledeverafter.html">Tangled Ever After (2012)</a></div>
+  </div>
+
+
+</body>
+</html>
