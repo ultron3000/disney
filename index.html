@@ -2,190 +2,1007 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disney Animation Movie Collection</title>
+  <title>Disney Animation Collection | Disney+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stream all your favorite Disney animated movies including Frozen, Moana, Zootopia, and more on Disney+">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      color: #fff;
-      text-align: center;
-      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #000000, #1a1a2e);
+      min-height: 100vh;
+      color: white;
+    }
+    .movie-card:hover .play-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .modal-enter {
+      animation: modalEnter 0.3s ease-out forwards;
+    }
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .showcase-header {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%), 
+                  url('https://lumiere-a.akamaihd.net/v1/images/image_5ef0a1bf.jpeg') no-repeat center center;
+      background-size: cover;
+      height: 70vh;
+      min-height: 500px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+    }
+    .disney-blue {
+      background-color: #113CCF;
+    }
+    .disney-blue-text {
+      color: #113CCF;
+    }
+    .disney-gold {
+      background-color: #FED141;
+    }
+    .disney-gold-text {
+      color: #FED141;
+    }
+    .scroll-container {
+      scrollbar-width: thin;
+      scrollbar-color: #113CCF #1a1a2e;
+    }
+    .scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .scroll-container::-webkit-scrollbar-track {
+      background: #1a1a2e;
+    }
+    .scroll-container::-webkit-scrollbar-thumb {
+      background-color: #113CCF;
+      border-radius: 20px;
+    }
+    .shine-effect {
       position: relative;
+      overflow: hidden;
     }
-
-    /* Background setup */
-    .background {
+    .shine-effect::after {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Walt_Disney_Pictures_2011_logo_%28colored%29.svg/1200px-Walt_Disney_Pictures_2011_logo_%28colored%29.svg.png') no-repeat center center fixed;
-      background-size: cover;
-      z-index: -1;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255,255,255,0.13);
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.13) 0%,
+        rgba(255,255,255,0.13) 77%,
+        rgba(255,255,255,0.5) 92%,
+        rgba(255,255,255,0.0) 100%
+      );
+      transform: rotate(30deg);
+      transition: all 0.7s ease-out;
     }
-
-    /* Dark overlay for better text visibility */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-top: 50px;
-      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-      font-family: 'Helvetica', sans-serif;
-      font-weight: bold;
-      color: #ffcc00; /* Gold color for Disney theme */
-    }
-
-    .movie-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 50px;
-      padding: 20px;
-    }
-
-    .movie-card {
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid #ffcc00;
-      border-radius: 12px;
-      padding: 20px;
-      width: 200px;
-      transition: all 0.3s ease;
-      text-align: center;
-      backdrop-filter: blur(8px);
-    }
-
-    .movie-card:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-    }
-
-    .movie-card a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1.2rem;
-      font-weight: bold;
-      transition: color 0.3s ease;
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
-    }
-
-    .movie-card a:hover {
-      color: #ffcc00;
-    }
-
-    .back-button {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #c00;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-    }
-
-    .back-button:hover {
-      background-color: #900;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .movie-container {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .movie-card {
-        width: 80%;
-        margin-bottom: 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .movie-card {
-        width: 90%;
-        font-size: 1rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
+    .shine-effect:hover::after {
+      left: 100%;
     }
   </style>
 </head>
 <body>
+  <div class="showcase-header">
+    <header class="bg-gradient-to-b from-black to-transparent py-4 px-6">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10 disney-blue rounded-full flex items-center justify-center shine-effect">
+            <i class="fas fa-play text-white"></i>
+          </div>
+          <h1 class="text-xl font-bold disney-blue-text">Disney<span class="text-white">+</span></h1>
+        </div>
+        <nav class="hidden md:flex space-x-6">
+          <a href="#" class="hover:disney-blue-text transition">Home</a>
+          <a href="#" class="hover:disney-blue-text transition">Movies</a>
+          <a href="#" class="hover:disney-blue-text transition">Characters</a>
+          <a href="#" class="hover:disney-blue-text transition">Shorts</a>
+        </nav>
+        <button class="md:hidden text-2xl disney-blue-text">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
 
-  <div class="background"></div>
-  <div class="overlay"></div>
-
-  <h1>Disney Animation Movie Collection</h1>
-
-  <div class="movie-container">
-    <div class="movie-card"><a href="wreckitralph.html">Wreck-It Ralph (2012)</a></div>
-    <div class="movie-card"><a href="ralphbreakstheinternet.html">Ralph Breaks the Internet (2018)</a></div>
-    <div class="movie-card"><a href="strangeworld.html">Strange World (2022)</a></div>
-    <div class="movie-card"><a href="bighero6.html">Big Hero 6 (2014)</a></div>
-    <div class="movie-card"><a href="zootopia.html">Zootopia (2016)</a></div>
-    <div class="movie-card"><a href="moana.html">Moana (2016)</a></div>
-    <div class="movie-card"><a href="moana2.html">Moana 2 (2024)</a></div>
-    <div class="movie-card"><a href="encanto.html">Encanto (2021)</a></div>
-    <div class="movie-card"><a href="rayaandthelastdragon.html">Raya and the Last Dragon (2021)</a></div>
-    <div class="movie-card"><a href="usagain.html">Us Again (2021)</a></div>
-    <div class="movie-card"><a href="therescuersdownunder.html">The Rescuers Down Under (1990)</a></div>
-    <div class="movie-card"><a href="planes.html">Planes (2013)</a></div>
-    <div class="movie-card"><a href="wish.html">Wish (2023)</a></div>
-    <div class="movie-card"><a href="frozen.html">Frozen (2013)</a></div>
-    <div class="movie-card"><a href="frozen2.html">Frozen II (2019)</a></div>
-    <div class="movie-card"><a href="frozenfever.html">Frozen Fever (2015)</a></div>
-    <div class="movie-card"><a href="arendellecastleyulelog.html">Arendelle Castle Yule Log: Cut Paper Edition (2020)</a></div>
-    <div class="movie-card"><a href="onceuponasnowman.html">Once Upon a Snowman (2020)</a></div>
-    <div class="movie-card"><a href="mythafrozentale.html">Myth: A Frozen Tale (2020)</a></div>
-    <div class="movie-card"><a href="beautyandthebeast.html">Beauty and the Beast (1991)</a></div>
-    <div class="movie-card"><a href="lionking.html">The Lion King (1994)</a></div>
-    <div class="movie-card"><a href="mufasalionking.html">Mufasa: The Lion King (2023)</a></div>
-    <div class="movie-card"><a href="paperman.html">Paperman (2012)</a></div>
-    <div class="movie-card"><a href="getahorse.html">Get a Horse! (2013)</a></div>
-    <div class="movie-card"><a href="feast.html">Feast (2014)</a></div>
-    <div class="movie-card"><a href="pocahontas.html">Pocahontas (1995)</a></div>
-    <div class="movie-card"><a href="farfromthetree.html">Far From the Tree (2021)</a></div>
-    <div class="movie-card"><a href="innerworkings.html">Inner Workings (2016)</a></div>
-    <div class="movie-card"><a href="hercules.html">Hercules (1997)</a></div>
-    <div class="movie-card"><a href="bolt.html">Bolt (2008)</a></div>
-    <div class="movie-card"><a href="superrhino.html">Super Rhino (2009)</a></div>
-    <div class="movie-card"><a href="mulan.html">Mulan (1998)</a></div>
-    <div class="movie-card"><a href="tarzan.html">Tarzan (1999)</a></div>
-    <div class="movie-card"><a href="thelittlemermaidii.html">The Little Mermaid II: Return to the Sea (2000)</a></div>
-    <div class="movie-card"><a href="dinosaur.html">Dinosaur (2000)</a></div>
-    <div class="movie-card"><a href="emperorsnewgroove.html">The Emperor's New Groove (2000)</a></div>
-    <div class="movie-card"><a href="atlantis.html">Atlantis: The Lost Empire (2001)</a></div>
-    <div class="movie-card"><a href="liloandstitch.html">Lilo & Stitch (2002)</a></div>
-    <div class="movie-card"><a href="treasureplanet.html">Treasure Planet (2002)</a></div>
-    <div class="movie-card"><a href="destino.html">Destino (2003)</a></div>
-    <div class="movie-card"><a href="brotherbear.html">Brother Bear (2003)</a></div>
-    <div class="movie-card"><a href="chickenlittle.html">Chicken Little (2005)</a></div>
-    <div class="movie-card"><a href="meettherobinsons.html">Meet the Robinsons (2007)</a></div>
-    <div class="movie-card"><a href="princessandthefrog.html">The Princess and the Frog (2009)</a></div>
-    <div class="movie-card"><a href="ticktocktale.html">Tick Tock Tale (2010)</a></div>
-    <div class="movie-card"><a href="winniethepooh.html">Winnie the Pooh (2011)</a></div>
-    <div class="movie-card"><a href="prepandlanding.html">Prep & Landing: Naughty vs. Nice (2011)</a></div>
-    <div class="movie-card"><a href="tangledeverafter.html">Tangled Ever After (2012)</a></div>
+    <div class="container mx-auto px-4 flex-1 flex items-center">
+      <div class="max-w-4xl">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 gradient-text">Disney Animation Collection</h1>
+        <div class="flex items-center space-x-4 mb-6">
+          <span class="disney-blue text-white px-3 py-1 rounded-full text-sm font-semibold">Featured</span>
+          <span class="text-gray-400">1990-2024</span>
+          <span class="text-gray-400">•</span>
+          <span class="text-gray-400">40+ Movies & Shorts</span>
+        </div>
+        <p class="text-lg text-gray-300 mb-6">
+          Enjoy all your favorite Disney animated movies in one place. From classic fairy tales to modern adventures, 
+          experience the magic of Disney's animated universe.
+        </p>
+        <div class="flex space-x-4">
+          <button class="disney-blue hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full flex items-center transition transform hover:scale-105 shine-effect">
+            <i class="fas fa-play mr-2"></i> Featured
+          </button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full flex items-center transition">
+            <i class="fas fa-plus mr-2"></i> My List
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <main class="container mx-auto px-4 pb-16">
+    <!-- Featured Collection -->
+    <section class="mb-12">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold flex items-center">
+          <span class="mr-2 disney-blue-text">Featured</span>
+          <i class="fas fa-star disney-blue-text"></i>
+        </h2>
+        <a href="#" class="text-sm disney-blue-text hover:underline">View All</a>
+      </div>
+      <div class="relative">
+        <div class="scroll-container overflow-x-auto pb-4 flex space-x-6">
+          <div class="flex-none w-64 md:w-80">
+            <div class="movie-card cursor-pointer bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 relative">
+              <div class="relative">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_moana_20530_214763e3.jpeg" alt="Moana" class="w-full h-40 md:h-48 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition">
+                  <div class="play-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 disney-blue bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center opacity-0 transition">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                </div>
+                <span class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">107 min</span>
+              </div>
+              <div class="p-4">
+                <div class="flex justify-between items-start mb-1">
+                  <h2 class="text-lg font-semibold">Moana</h2>
+                  <span class="disney-blue-text text-sm">★ 4.7</span>
+                </div>
+                <p class="text-sm text-gray-400">2016 • Adventure</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex-none w-64 md:w-80">
+            <div class="movie-card cursor-pointer bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 relative">
+              <div class="relative">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_frozen_18373_3131259c.jpeg" alt="Frozen" class="w-full h-40 md:h-48 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition">
+                  <div class="play-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 disney-blue bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center opacity-0 transition">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                </div>
+                <span class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">102 min</span>
+              </div>
+              <div class="p-4">
+                <div class="flex justify-between items-start mb-1">
+                  <h2 class="text-lg font-semibold">Frozen</h2>
+                  <span class="disney-blue-text text-sm">★ 4.8</span>
+                </div>
+                <p class="text-sm text-gray-400">2013 • Musical</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex-none w-64 md:w-80">
+            <div class="movie-card cursor-pointer bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 relative">
+              <div class="relative">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_zootopia_19639_4a4b4a9a.jpeg" alt="Zootopia" class="w-full h-40 md:h-48 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition">
+                  <div class="play-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 disney-blue bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center opacity-0 transition">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                </div>
+                <span class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">108 min</span>
+              </div>
+              <div class="p-4">
+                <div class="flex justify-between items-start mb-1">
+                  <h2 class="text-lg font-semibold">Zootopia</h2>
+                  <span class="disney-blue-text text-sm">★ 4.9</span>
+                </div>
+                <p class="text-sm text-gray-400">2016 • Comedy</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex-none w-64 md:w-80">
+            <div class="movie-card cursor-pointer bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 relative">
+              <div class="relative">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_encanto_homeent_21559_4896ae1c.jpeg" alt="Encanto" class="w-full h-40 md:h-48 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition">
+                  <div class="play-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 disney-blue bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center opacity-0 transition">
+                    <i class="fas fa-play text-white"></i>
+                  </div>
+                </div>
+                <span class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">102 min</span>
+              </div>
+              <div class="p-4">
+                <div class="flex justify-between items-start mb-1">
+                  <h2 class="text-lg font-semibold">Encanto</h2>
+                  <span class="disney-blue-text text-sm">★ 4.6</span>
+                </div>
+                <p class="text-sm text-gray-400">2021 • Musical</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Franchise Sections -->
+    <section class="mb-12">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold flex items-center">
+          <i class="fas fa-snowflake mr-2 disney-blue-text"></i>
+          <span>Frozen Collection</span>
+        </h2>
+        <a href="#" class="text-sm disney-blue-text hover:underline">View All</a>
+      </div>
+      <div id="movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold flex items-center">
+          <i class="fas fa-music mr-2 disney-gold-text"></i>
+          <span>Musicals & Adventures</span>
+        </h2>
+        <a href="#" class="text-sm disney-blue-text hover:underline">View All</a>
+      </div>
+      <div id="sing-movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    </section>
+
+    <section class="mb-12">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold flex items-center">
+          <i class="fas fa-film mr-2 disney-blue-text"></i>
+          <span>Shorts & Specials</span>
+        </h2>
+        <a href="#" class="text-sm disney-blue-text hover:underline">View All</a>
+      </div>
+      <div id="shorts" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="playback-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-90">
+    <div class="relative w-full max-w-4xl bg-gray-900 rounded-xl overflow-hidden modal-enter">
+      <button id="close-modal" class="absolute top-4 right-4 z-50 text-white hover:disney-blue-text text-2xl transition">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="aspect-w-16 aspect-h-9">
+        <video id="modal-video" class="w-full" controls poster="https://lumiere-a.akamaihd.net/v1/images/image_5ef0a1bf.jpeg"></video>
+      </div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 id="modal-title" class="text-2xl font-bold mb-1"></h3>
+            <div class="text-gray-400 text-sm">
+              <span id="movie-year"></span> • <span id="movie-duration"></span> • <span class="disney-blue-text">★ <span id="movie-rating"></span>/10</span>
+            </div>
+          </div>
+          <div class="flex space-x-3">
+            <button class="text-gray-400 hover:text-white transition">
+              <i class="fas fa-share-alt"></i>
+            </button>
+            <button class="text-gray-400 hover:text-white transition">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+          </div>
+        </div>
+        <p id="modal-description" class="text-gray-300 mb-6"></p>
+        <div class="flex space-x-4">
+          <button class="disney-blue hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full flex items-center transition transform hover:scale-105">
+            <i class="fas fa-play mr-2"></i> Play
+          </button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full flex items-center transition">
+            <i class="fas fa-plus mr-2"></i> Watchlist
+          </button>
+          <button class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-4 rounded-full transition">
+            <i class="fas fa-thumbs-up"></i>
+          </button>
+        </div>
+        <div class="mt-6 pt-6 border-t border-gray-800">
+          <h4 class="text-sm font-semibold text-gray-400 mb-2">Details</h4>
+          <p class="text-gray-300 text-sm"><span id="movie-genre"></span> • <span id="movie-director"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-10 h-10 disney-blue rounded-full flex items-center justify-center">
+              <i class="fas fa-play text-white"></i>
+            </div>
+            <h1 class="text-xl font-bold disney-blue-text">Disney<span class="text-white">+</span></h1>
+          </div>
+          <p class="text-gray-400 text-sm">© 2024 Disney+ Original Collection</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-gray-300 font-semibold mb-3">Navigation</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Home</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Movies</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Characters</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Shorts</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-gray-300 font-semibold mb-3">Legal</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Terms</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Privacy</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Cookies</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-gray-300 font-semibold mb-3">About</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Disney</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Careers</a></li>
+              <li><a href="#" class="text-gray-400 hover:disney-blue-text text-sm transition">Press</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-gray-300 font-semibold mb-3">Social</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:disney-blue-text transition"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-400 hover:disney-blue-text transition"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="text-gray-400 hover:disney-blue-text transition"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-gray-400 hover:disney-blue-text transition"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const movies = [
+      { 
+        title: "Wreck-It Ralph", 
+        video: "https://www.youtube.com/embed/87E6N7ToCxs", 
+        image: "https://i.pinimg.com/736x/a6/9d/92/a69d92d70db476d200db5592f4327d0c.jpg",
+        year: 2012,
+        duration: "101 min",
+        rating: 4.5,
+        genre: "Animation, Adventure",
+        director: "Rich Moore",
+        description: "A video game villain wants to be a hero and sets out to fulfill his dream, but his quest brings havoc to the whole arcade where he lives."
+      },
+      { 
+        title: "Ralph Breaks the Internet", 
+        video: "https://www.youtube.com/embed/_BcYBFC6zfY", 
+        image: "https://static0.moviewebimages.com/wordpress/wp-content/uploads/movie/ZXzJyhpXL50m4rfnWKPjPax05xEUA5.jpg",
+        year: 2018,
+        duration: "112 min",
+        rating: 4.6,
+        genre: "Animation, Adventure",
+        director: "Rich Moore, Phil Johnston",
+        description: "Six years after the events of Wreck-It Ralph, Ralph and Vanellope, now friends, discover a wi-fi router in their arcade, leading them into a new adventure."
+      },
+      { 
+        title: "Strange World", 
+        video: "https://www.youtube.com/embed/bKh2G73gCCs", 
+        image: "https://i.pinimg.com/736x/ce/20/79/ce20791dd5231145ddb793a6254f0ae9.jpg",
+        year: 2022,
+        duration: "102 min",
+        rating: 4.2,
+        genre: "Animation, Adventure",
+        director: "Don Hall, Qui Nguyen",
+        description: "The legendary Clades are a family of explorers whose differences threaten to topple their latest and most crucial mission."
+      },
+      { 
+        title: "Big Hero 6", 
+        video: "https://www.youtube.com/embed/z3biFxZIJOQ", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_bighero6_19753_63f6f0f8.jpeg",
+        year: 2014,
+        duration: "102 min",
+        rating: 4.7,
+        genre: "Animation, Action",
+        director: "Don Hall, Chris Williams",
+        description: "The special bond that develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes."
+      },
+      { 
+        title: "Zootopia", 
+        video: "https://www.youtube.com/embed/jWM0ct-OLsM", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_zootopia_19639_4a4b4a9a.jpeg",
+        year: 2016,
+        duration: "108 min",
+        rating: 4.9,
+        genre: "Animation, Comedy",
+        director: "Byron Howard, Rich Moore",
+        description: "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy."
+      },
+      { 
+        title: "Tangled", 
+        video: "https://www.youtube.com/embed/jWM0ct-OLsM", 
+        image: "https://i.ebayimg.com/images/g/qS4AAOSwDk5Tre86/s-l1200.jpg",
+        year: 2010,
+        duration: "100 min",
+        rating: 7.7,
+        genre: "Family, Musical",
+        director: "Byron Howard, Nathan Greno",
+        description: "The magically long-haired Rapunzel has spent her entire life in a tower, but now that a runaway thief has stumbled upon her, she is about to discover the world for the first time, and who she really is."
+      },
+      { 
+        title: "Moana", 
+        video: "https://www.youtube.com/embed/LKFuXETZUsI", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_moana_20530_214763e3.jpeg",
+        year: 2016,
+        duration: "107 min",
+        rating: 4.7,
+        genre: "Animation, Adventure",
+        director: "Ron Clements, John Musker",
+        description: "In Ancient Polynesia, when a terrible curse incurred by the Demigod Maui reaches Moana's island, she answers the Ocean's call to seek out the Demigod to set things right."
+      },
+      { 
+        title: "Moana 2", 
+        video: "https://www.youtube.com/embed/LKFuXETZUsI", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/pp_moana2_herobanner_mobile_21852_7e5c0e5a.jpeg",
+        year: 2024,
+        duration: "110 min",
+        rating: 4.8,
+        genre: "Animation, Adventure",
+        director: "David G. Derrick Jr.",
+        description: "Moana returns in a new adventure that takes her beyond the reef on a dangerous journey to the far seas of Oceania."
+      },
+      { 
+        title: "Encanto", 
+        video: "https://www.youtube.com/embed/CaimKeDcudo", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_encanto_homeent_21559_4896ae1c.jpeg",
+        year: 2021,
+        duration: "102 min",
+        rating: 4.6,
+        genre: "Animation, Musical",
+        director: "Jared Bush, Byron Howard",
+        description: "A Colombian teenage girl has to face the frustration of being the only member of her family without magical powers."
+      },
+      { 
+        title: "Raya and the Last Dragon", 
+        video: "https://www.youtube.com/embed/1VIZ89FEjYI", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_rayaandthelastdragon_21294_bb217f1f.jpeg",
+        year: 2021,
+        duration: "107 min",
+        rating: 4.5,
+        genre: "Animation, Adventure",
+        director: "Don Hall, Carlos López Estrada",
+        description: "In a realm known as Kumandra, a re-imagined Earth inhabited by an ancient civilization, a warrior named Raya is determined to find the last dragon."
+      },
+      { 
+        title: "Us Again", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/us_again_onesheet_21032_3c4a0f4f.jpeg",
+        year: 2021,
+        duration: "7 min",
+        rating: 4.3,
+        genre: "Animation, Short",
+        director: "Zach Parrish",
+        description: "A short film about an elderly man and his wife who magically become young again for one night."
+      },
+      { 
+        title: "The Rescuers Down Under", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_therescuersdownunder_19853_5b6b2b6a.jpeg",
+        year: 1990,
+        duration: "77 min",
+        rating: 4.0,
+        genre: "Animation, Adventure",
+        director: "Hendel Butoy, Mike Gabriel",
+        description: "Bernard and Miss Bianca travel to the Australian outback to save a boy named Cody from a evil poacher."
+      },
+      { 
+        title: "Planes", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_planes_19653_8c7e1a6d.jpeg",
+        year: 2013,
+        duration: "91 min",
+        rating: 3.9,
+        genre: "Animation, Adventure",
+        director: "Klay Hall",
+        description: "Dusty is a cropdusting plane who dreams of competing in a famous aerial race. The problem? He's hopelessly afraid of heights."
+      },
+      { 
+        title: "Wish", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_wish_22844_9c3a1c6e.jpeg",
+        year: 2023,
+        duration: "95 min",
+        rating: 4.1,
+        genre: "Animation, Fantasy",
+        director: "Chris Buck, Fawn Veerasunthorn",
+        description: "A young girl named Asha possesses a magical ability to make wishes come true, but when she discovers a dark secret about the kingdom's ruler, she must fight to save her people."
+      },
+      { 
+        title: "Frozen", 
+        video: "https://www.youtube.com/embed/TbQm5doF_Uc", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_frozen_18373_3131259c.jpeg",
+        year: 2013,
+        duration: "102 min",
+        rating: 4.8,
+        genre: "Animation, Musical",
+        director: "Chris Buck, Jennifer Lee",
+        description: "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition."
+      },
+      { 
+        title: "Frozen II", 
+        video: "https://www.youtube.com/embed/Zi4LMpSDccc", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_frozen2_18463_8a5e7d16.jpeg",
+        year: 2019,
+        duration: "103 min",
+        rating: 4.7,
+        genre: "Animation, Adventure",
+        director: "Chris Buck, Jennifer Lee",
+        description: "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom."
+      },
+      { 
+        title: "Frozen Fever", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_frozenfever_19754_8a5e7d16.jpeg",
+        year: 2015,
+        duration: "7 min",
+        rating: 4.3,
+        genre: "Animation, Short",
+        director: "Chris Buck, Jennifer Lee",
+        description: "Elsa plans a birthday party for Anna, but she keeps sneezing and summoning little snowmen who wreak havoc on the party."
+      },
+      { 
+        title: "Arendelle Castle Yule Log: Cut Paper Edition", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/arendelle_castle_yule_log_cut_paper_edition_onesheet_21032_3c4a0f4f.jpeg",
+        year: 2020,
+        duration: "60 min",
+        rating: 4.0,
+        genre: "Animation, Special",
+        director: "Disney Animation",
+        description: "A cozy yule log video featuring the Frozen characters in a beautiful cut-paper style animation."
+      },
+      { 
+        title: "Once Upon a Snowman", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_onceuponasnowman_19755_8a5e7d16.jpeg",
+        year: 2020,
+        duration: "8 min",
+        rating: 4.2,
+        genre: "Animation, Short",
+        director: "Dan Abraham, Trent Correy",
+        description: "The story of how Olaf the snowman came to life and found his nose in this short film set during the events of Frozen."
+      },
+      { 
+        title: "Myth: A Frozen Tale", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_mythafrozentale_19756_8a5e7d16.jpeg",
+        year: 2020,
+        duration: "9 min",
+        rating: 4.1,
+        genre: "Animation, Short",
+        director: "Jeff Gipson",
+        description: "A bedtime story about the elemental spirits that inhabit the enchanted forest of Frozen 2."
+      },
+      { 
+        title: "Beauty and the Beast", 
+        video: "https://www.youtube.com/embed/tRlzmyveDHE", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_beautyandthebeast_19757_8a5e7d16.jpeg",
+        year: 1991,
+        duration: "84 min",
+        rating: 4.9,
+        genre: "Animation, Musical",
+        director: "Gary Trousdale, Kirk Wise",
+        description: "A prince cursed to spend his days as a hideous monster sets out to regain his humanity by earning a young woman's love."
+      },
+      { 
+        title: "The Lion King", 
+        video: "https://www.youtube.com/embed/4sj1MT05lAA", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_thelionking_19758_8a5e7d16.jpeg",
+        year: 1994,
+        duration: "88 min",
+        rating: 4.9,
+        genre: "Animation, Musical",
+        director: "Roger Allers, Rob Minkoff",
+        description: "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself."
+      },
+      { 
+        title: "Mufasa: The Lion King", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_mufasathelionking_22845_9c3a1c6e.jpeg",
+        year: 2023,
+        duration: "98 min",
+        rating: 4.5,
+        genre: "Animation, Adventure",
+        director: "Barry Jenkins",
+        description: "This prequel to The Lion King follows Mufasa's rise from orphaned cub to legendary king of the Pride Lands."
+      },
+      { 
+        title: "Paperman", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_paperman_19759_8a5e7d16.jpeg",
+        year: 2012,
+        duration: "7 min",
+        rating: 4.6,
+        genre: "Animation, Short",
+        director: "John Kahrs",
+        description: "An office worker uses paper airplanes to meet the girl of his dreams in this black-and-white animated short."
+      },
+      { 
+        title: "Get a Horse!", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_getahorse_19760_8a5e7d16.jpeg",
+        year: 2013,
+        duration: "6 min",
+        rating: 4.3,
+        genre: "Animation, Short",
+        director: "Lauren MacMullan",
+        description: "Mickey Mouse and his friends go on a wild ride when Peg-Leg Pete tries to run them off the road."
+      },
+      { 
+        title: "Feast", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_feast_19761_8a5e7d16.jpeg",
+        year: 2014,
+        duration: "6 min",
+        rating: 4.5,
+        genre: "Animation, Short",
+        director: "Patrick Osborne",
+        description: "The story of one man's love life as seen through the eyes of his best friend and dog, Winston."
+      },
+      { 
+        title: "Pocahontas", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_pocahontas_19762_8a5e7d16.jpeg",
+        year: 1995,
+        duration: "81 min",
+        rating: 4.3,
+        genre: "Animation, Musical",
+        director: "Mike Gabriel, Eric Goldberg",
+        description: "An American Indian woman is supposed to marry the village's best warrior, but she yearns for something more—and soon meets Capt. John Smith."
+      },
+      { 
+        title: "Far From the Tree", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_farfromthetree_19763_8a5e7d16.jpeg",
+        year: 2021,
+        duration: "7 min",
+        rating: 4.4,
+        genre: "Animation, Short",
+        director: "Natalie Nourigat",
+        description: "A young raccoon learns the meaning of caution from his protective parent in this heartwarming short."
+      },
+      { 
+        title: "Inner Workings", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_innerworkings_19764_8a5e7d16.jpeg",
+        year: 2016,
+        duration: "6 min",
+        rating: 4.2,
+        genre: "Animation, Short",
+        director: "Leonardo Matsuda",
+        description: "The internal organs of a man named Paul go to war with his brain as he tries to balance work and play."
+      },
+      { 
+        title: "Hercules", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_hercules_19765_8a5e7d16.jpeg",
+        year: 1997,
+        duration: "93 min",
+        rating: 4.5,
+        genre: "Animation, Musical",
+        director: "Ron Clements, John Musker",
+        description: "The son of the Greek Gods Zeus and Hera is stripped of his immortality as an infant and must become a true hero to reclaim it."
+      },
+      { 
+        title: "Bolt", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_bolt_19766_8a5e7d16.jpeg",
+        year: 2008,
+        duration: "96 min",
+        rating: 4.3,
+        genre: "Animation, Adventure",
+        director: "Byron Howard, Chris Williams",
+        description: "The canine star of a fictional sci-fi/action show believes his powers are real. When he's accidentally shipped to New York, he begins a cross-country journey to reunite with his owner."
+      },
+      { 
+        title: "Super Rhino", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_superrhino_19767_8a5e7d16.jpeg",
+        year: 2009,
+        duration: "4 min",
+        rating: 4.0,
+        genre: "Animation, Short",
+        director: "Nathan Greno",
+        description: "Rhino the hamster imagines himself as a superhero in this short film featuring characters from Bolt."
+      },
+      { 
+        title: "Mulan", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_mulan_19768_8a5e7d16.jpeg",
+        year: 1998,
+        duration: "88 min",
+        rating: 4.7,
+        genre: "Animation, Adventure",
+        director: "Tony Bancroft, Barry Cook",
+        description: "To save her father from death in the army, a young maiden secretly goes in his place and becomes one of China's greatest heroines in the process."
+      },
+      { 
+        title: "Tarzan", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_tarzan_19769_8a5e7d16.jpeg",
+        year: 1999,
+        duration: "88 min",
+        rating: 4.5,
+        genre: "Animation, Adventure",
+        director: "Chris Buck, Kevin Lima",
+        description: "A man raised by gorillas must decide where he really belongs when he discovers he's a human."
+      },
+      { 
+        title: "The Little Mermaid II: Return to the Sea", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_thelittlemermaid2returntothesea_19770_8a5e7d16.jpeg",
+        year: 2000,
+        duration: "75 min",
+        rating: 3.9,
+        genre: "Animation, Adventure",
+        director: "Jim Kammerud",
+        description: "Ariel's daughter, Melody, longs to be part of the underwater world, but when she's tricked by Ursula's sister, Morgana, Ariel and her family must save her."
+      },
+      { 
+        title: "Dinosaur", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_dinosaur_19771_8a5e7d16.jpeg",
+        year: 2000,
+        duration: "82 min",
+        rating: 3.8,
+        genre: "Animation, Adventure",
+        director: "Ralph Zondag, Eric Leighton",
+        description: "An orphaned dinosaur raised by lemurs joins an arduous trek to a sancturary after a meteorite shower destroys his family home."
+      },
+      { 
+        title: "The Emperor's New Groove", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_theemperorsnewgroove_19772_8a5e7d16.jpeg",
+        year: 2000,
+        duration: "78 min",
+        rating: 4.6,
+        genre: "Animation, Comedy",
+        director: "Mark Dindal",
+        description: "Emperor Kuzco is turned into a llama by his ex-administrator Yzma, and must now regain his throne with the help of Pacha, the gentle llama herder."
+      },
+      { 
+        title: "Atlantis: The Lost Empire", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_atlantisthelostempire_19773_8a5e7d16.jpeg",
+        year: 2001,
+        duration: "95 min",
+        rating: 4.2,
+        genre: "Animation, Adventure",
+        director: "Gary Trousdale, Kirk Wise",
+        description: "A young linguist joins an intrepid group of explorers to find the mysterious lost continent of Atlantis."
+      },
+      { 
+        title: "Lilo & Stitch", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_liloandstitch_19774_8a5e7d16.jpeg",
+        year: 2002,
+        duration: "85 min",
+        rating: 4.6,
+        genre: "Animation, Comedy",
+        director: "Dean DeBlois, Chris Sanders",
+        description: "A young Hawaiian girl befriends a dog-like alien who is actually an illegal genetic experiment hiding from intergalactic authorities."
+      },
+      { 
+        title: "Treasure Planet", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_treasureplanet_19775_8a5e7d16.jpeg",
+        year: 2002,
+        duration: "95 min",
+        rating: 4.3,
+        genre: "Animation, Adventure",
+        director: "Ron Clements, John Musker",
+        description: "A Disney version of Robert Louis Stevenson's Treasure Island, with a sci-fi twist."
+      },
+      { 
+        title: "Destino", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_destino_19776_8a5e7d16.jpeg",
+        year: 2003,
+        duration: "7 min",
+        rating: 4.4,
+        genre: "Animation, Short",
+        director: "Dominique Monféry",
+        description: "A collaboration between Walt Disney and Salvador Dalí that was begun in 1945 and finally completed in 2003."
+      },
+      { 
+        title: "Brother Bear", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_brotherbear_19777_8a5e7d16.jpeg",
+        year: 2003,
+        duration: "85 min",
+        rating: 4.2,
+        genre: "Animation, Adventure",
+        director: "Aaron Blaise, Robert Walker",
+        description: "When a young Inuit hunter kills a bear for revenge, he is magically changed into a bear himself."
+      },
+      { 
+        title: "Chicken Little", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_chickenlittle_19778_8a5e7d16.jpeg",
+        year: 2005,
+        duration: "81 min",
+        rating: 3.7,
+        genre: "Animation, Comedy",
+        director: "Mark Dindal",
+        description: "After ruining his reputation with the town, a courageous chicken must come to the rescue of his fellow citizens when aliens start an invasion."
+      },
+      { 
+        title: "Meet the Robinsons", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_meettherobinsons_19779_8a5e7d16.jpeg",
+        year: 2007,
+        duration: "95 min",
+        rating: 4.1,
+        genre: "Animation, Adventure",
+        director: "Stephen Anderson",
+        description: "Lewis is a brilliant inventor who meets mysterious stranger named Wilbur Robinson, whisking Lewis away in a time machine to the future."
+      },
+      { 
+        title: "The Princess and the Frog", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_theprincessandthefrog_19780_8a5e7d16.jpeg",
+        year: 2009,
+        duration: "97 min",
+        rating: 4.5,
+        genre: "Animation, Musical",
+        director: "Ron Clements, John Musker",
+        description: "A waitress, desperate to fulfill her dreams as a restaurant owner, is set on a journey to turn a frog prince back into a human being, but she has to face the same problem after she kisses him."
+      },
+      { 
+        title: "Tick Tock Tale", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_ticktocktale_19781_8a5e7d16.jpeg",
+        year: 2010,
+        duration: "6 min",
+        rating: 4.1,
+        genre: "Animation, Short",
+        director: "Dean Wellins",
+        description: "A cuckoo clock bird must save the day when the clock tower's mechanism breaks down."
+      },
+      { 
+        title: "Winnie the Pooh", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_winniethepooh_19782_8a5e7d16.jpeg",
+        year: 2011,
+        duration: "63 min",
+        rating: 4.3,
+        genre: "Animation, Comedy",
+        director: "Stephen Anderson, Don Hall",
+        description: "Winnie the Pooh and friends go on a quest to save Christopher Robin from an imaginary culprit."
+      },
+      { 
+        title: "Prep & Landing: Naughty vs. Nice", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_prepandlandingnaughtyvsnice_19783_8a5e7d16.jpeg",
+        year: 2011,
+        duration: "22 min",
+        rating: 4.2,
+        genre: "Animation, Short",
+        director: "Kevin Deters, Stevie Wermers",
+        description: "The elite unit of Christmas elves known as Prep & Landing must thwart an attack on Santa's workshop."
+      },
+      { 
+        title: "Tangled Ever After", 
+        video: "https://www.youtube.com/embed/5v5Z7l3V8j8", 
+        image: "https://lumiere-a.akamaihd.net/v1/images/p_tangledeverafter_19784_8a5e7d16.jpeg",
+        year: 2012,
+        duration: "6 min",
+        rating: 4.3,
+        genre: "Animation, Short",
+        director: "Nathan Greno, Byron Howard",
+        description: "Pascal and Maximus must retrieve Rapunzel and Flynn's lost wedding rings before the ceremony begins."
+      }
+    ];
+
+    const container = document.getElementById('movies');
+    const singContainer = document.getElementById('sing-movies');
+    const shortsContainer = document.getElementById('shorts');
+    const playbackModal = document.getElementById('playback-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const movieYear = document.getElementById('movie-year');
+    const movieDuration = document.getElementById('movie-duration');
+    const movieRating = document.getElementById('movie-rating');
+    const movieGenre = document.getElementById('movie-genre');
+    const movieDirector = document.getElementById('movie-director');
+
+    function isStream(url) {
+      return url.includes('.m3u8') || url.includes('.txt');
+    }
+
+    function openModal(movie) {
+      modalTitle.textContent = movie.title;
+      modalDescription.textContent = movie.description;
+      movieYear.textContent = movie.year;
+      movieDuration.textContent = movie.duration;
+      movieRating.textContent = movie.rating;
+      movieGenre.textContent = movie.genre;
+      movieDirector.textContent = movie.director;
+      modalVideo.src = movie.video;
+
+      playbackModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      modalVideo.play();
+    }
+
+    function closeModalHandler() {
+      playbackModal.classList.add('hidden');
+      modalVideo.pause();
+      modalVideo.src = "";
+      document.body.style.overflow = '';
+    }
+
+    closeModal.addEventListener('click', closeModalHandler);
+
+    // Render movie cards by franchise
+    movies.forEach((movie) => {
+      const card = document.createElement('div');
+      card.className = 'movie-card cursor-pointer bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 relative';
+      card.innerHTML = `
+        <div class="relative">
+          <img src="${movie.image}" alt="${movie.title}" class="w-full h-40 md:h-48 object-cover">
+          <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition">
+            <div class="play-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 disney-blue bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center opacity-0 transition">
+              <i class="fas fa-play text-white"></i>
+            </div>
+          </div>
+          <span class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">${movie.duration}</span>
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-1">
+            <h2 class="text-lg font-semibold">${movie.title}</h2>
+            <span class="disney-blue-text text-sm">★ ${movie.rating}</span>
+          </div>
+          <p class="text-sm text-gray-400">${movie.year} • ${movie.genre.split(',')[0]}</p>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        if (isStream(movie.video)) {
+          const url = `player.html?title=${encodeURIComponent(movie.title)}&video=${encodeURIComponent(movie.video)}`;
+          window.location.href = url;
+        } else {
+          openModal(movie);
+        }
+      });
+
+      // Sort into different containers based on franchise
+      if (movie.title.includes('Frozen') || movie.title.includes('Olaf') || movie.title.includes('Arendelle')) {
+        container.appendChild(card);
+      } else if (movie.title.includes('Moana') || movie.title.includes('Encanto') || movie.title.includes('Sing') || movie.title.includes('Musical')) {
+        singContainer.appendChild(card);
+      } else if (movie.duration.includes('min') && parseInt(movie.duration) < 20) {
+        shortsContainer.appendChild(card);
+      } else {
+        container.appendChild(card);
+      }
+    });
+  </script>
 </body>
 </html>
